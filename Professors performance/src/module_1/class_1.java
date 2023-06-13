@@ -1,6 +1,11 @@
 package module_1;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class class_1 {
+	
 
 	    private String name;
 	    private int yearsOfExperience;
@@ -18,6 +23,7 @@ public class class_1 {
 	        this.leavesTaken = leavesTaken;
 	    }
 
+	    
 
 	    public String getName() {
 	        return name;
@@ -43,7 +49,7 @@ public class class_1 {
 	        this.classesCount = classesCount;
 	    }
 
-	    public double getSalary() {
+	    public int getSalary() {
 	        return salary;
 	    }
 
@@ -68,4 +74,97 @@ public class class_1 {
 	    }
 
 
-}
+	
+		   public static Comparator<class_1> StringComparator = new Comparator<class_1>() 
+		   {
+			   
+		       
+		        public int compare(class_1 c1, class_1 c2) 
+		        {
+		         
+		        	String name1
+	                = c1.getName().toUpperCase();
+	            String name2
+	                = c2.getName().toUpperCase();
+		            return (name1.compareTo(name2));
+		        }
+		   };
+		 
+		   
+		   public static Comparator<class_1> AgeComparator = new Comparator<class_1>() {
+			   
+
+		        public int compare(class_1 s1, class_1 s2) {
+		 
+		            int age1 = s1.getAge();
+		            int age2 = s2.getAge();   
+		            return age1 - age2;
+		 
+		            
+		        }
+		    };
+		    
+		    public static Comparator<class_1> YOEComparator = new Comparator<class_1>() {
+				   
+
+		        public int compare(class_1 s1, class_1 s2) {
+		 
+		            int YOE1 = s1.getYearsOfExperience();
+		            int YOE2 = s2.getYearsOfExperience();   
+		            return YOE1 - YOE2;
+		 
+		            
+		        }
+		    };
+		    
+		    public static Comparator<class_1> ccountComparator = new Comparator<class_1>() {
+				   
+
+		        public int compare(class_1 s1, class_1 s2) {
+		 
+		            int ccount1 = s1.getClassesCount();
+		            int ccount2 = s2.getClassesCount();   
+		            return ccount1 - ccount2;
+		 
+		            
+		        }
+		    };
+		    
+		    public static Comparator<class_1> salaryComparator = new Comparator<class_1>() {
+				   
+
+		        public int compare(class_1 s1, class_1 s2) {
+		 
+		            int salary1 = s1.getSalary();
+		            int salary2 = s2.getSalary();   
+		            return salary1 - salary2;
+		 
+		            
+		        }
+		    };
+		    
+		    public static Comparator<class_1> LTComparator = new Comparator<class_1>() {
+				   
+
+		        public int compare(class_1 s1, class_1 s2) {
+		 
+		            int leavesTaken1 = s1.getLeavesTaken();
+		            int leavesTaken2 = s2.getAge();   
+		            return leavesTaken1 - leavesTaken2;
+		 
+		            
+		        }
+		    };
+		    
+		   public String toString() {
+			   
+		        return "[ name=" + name + ", yearsOfExperience="
+		               + yearsOfExperience + ", classesCount=" + classesCount + ", salary=" + salary + ", age=" + age + ", leavesTaken=" + leavesTaken +"]";
+		    }
+		   
+		   
+		          
+		   
+		        
+	    }
+
