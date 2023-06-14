@@ -216,7 +216,7 @@ public class class_1 {
 			            for (class_1 teacher : teachers) {
 			                System.out.println(teacher);
 			            }
-			            System.out.println(); // Add an empty line for separation
+			            System.out.println(); 
 			        
 			
 		}
