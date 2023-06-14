@@ -1,14 +1,8 @@
 package module_1;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import weka.classifiers.Classifier;
-import weka.classifiers.trees.J48;
-import weka.core.Attribute;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.converters.*;
+
 
 class SortByTeacherException extends Exception {
     public SortByTeacherException() {
@@ -24,11 +18,12 @@ public class main {
 		
 		ArrayList<class_1> teachers=new ArrayList<>();
 	    
-		teachers.add(new class_1("Nidhi", 12, 16, 80000, 35 , 8));
-		teachers.add(new class_1("Neha", 13, 7, 8000, 25 , 12));
-		teachers.add(new class_1("Dhanush", 14, 8, 9000, 15 , 5));
-		teachers.add(new class_1("Keerti", 13, 2, 19000, 5 , 7));
-		teachers.add(new class_1("Suresh", 11, 18, 4000, 13 , 7));
+		teachers.add(new class_1("Nidhi", 11, 6, 8000, 25 , 7));
+		teachers.add(new class_1("Neha", 12, 2, 80000, 5 , 5));
+		teachers.add(new class_1("Dhanush", 10, 18, 19000, 15 , 9));
+		teachers.add(new class_1("Keerti", 14, 12, 9000, 35 , 8));
+		teachers.add(new class_1("Suresh", 10, 8, 7000, 14 , 6));
+		teachers.add(new class_1("Ramesh", 11, 7, 4000, 13 , 11));
 	    
 	    c1.display(teachers);
 	    if(!teachers.isEmpty())

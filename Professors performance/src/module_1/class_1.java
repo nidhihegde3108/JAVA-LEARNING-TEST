@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class class_1 {
 	
 
-	    private static final Lock lock = new ReentrantLock();
+	   
 	    private String name;
 	    private int yearsOfExperience;
 	    private int classesCount;
@@ -204,13 +204,7 @@ public class class_1 {
 	                lPThread.start();
 	                lPThread.join();
 
-//	                hPThread.start();
-//	                mPThread.start();
-//	                lPThread.start();
-	                
-//	                hPThread.join();
-//	                mPThread.join();
-//	                lPThread.join();
+           
 	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
