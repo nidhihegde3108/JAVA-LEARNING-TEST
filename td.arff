@@ -1,0 +1,13 @@
+@relation teacher_dataset
+@attribute yearsOfExperience numeric
+@attribute classesCount numeric
+@attribute salary numeric
+@attribute age numeric
+@attribute leavesTaken numeric
+@attribute performingLevel {High, Medium, Low}
+@data
+12, 16, 80000, 35, 8, High
+13, 7, 8000, 25 , 12, Medium
+14, 8, 9000, 15 , 5, Medium
+13, 2, 19000, 5 , 7, High
+11, 18, 4000, 13 , 7, Low
