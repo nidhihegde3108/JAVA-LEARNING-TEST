@@ -1,10 +1,14 @@
 package module_1;
 
+import java.io.File;
 import java.util.ArrayList;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import weka.classifiers.Classifier;
+import weka.classifiers.trees.J48;
+import weka.core.Attribute;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.*;
 
 class SortByTeacherException extends Exception {
     public SortByTeacherException() {
@@ -38,7 +42,8 @@ public class main {
 	        } catch (SortByTeacherException e) {
 	            System.out.println(e.getMessage()); 
 	        }
-	    
+	        
+	       
 	}
 
 }

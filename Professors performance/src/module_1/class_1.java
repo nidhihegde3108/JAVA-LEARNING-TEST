@@ -1,6 +1,15 @@
 package module_1;
 
 import java.util.ArrayList;
+import weka.classifiers.Classifier;
+import weka.classifiers.trees.J48;
+import weka.core.Attribute;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.*;
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,6 +18,7 @@ import java.util.Scanner;
 public class class_1 {
 	
 
+	    private static final Lock lock = new ReentrantLock();
 	    private String name;
 	    private int yearsOfExperience;
 	    private int classesCount;
@@ -132,6 +142,10 @@ public class class_1 {
 	 	    case 6:Collections.sort(teachers,
 	                 class_1.LTComparator);
 	 	    		break;
+	 	    		
+	 	    		
+	 	    case 7:VerifyPerformance(teachers);
+	 	            System.exit(ch);
 	 	   
 	 	    }
 	 	    System.out.println("\n");
@@ -142,7 +156,78 @@ public class class_1 {
 	 	    }
 	    }
 	
-		   public static Comparator<class_1> StringComparator = new Comparator<class_1>() 
+		   private void VerifyPerformance(ArrayList<class_1> teachers) {
+			   try
+		        {
+
+		        ArffLoader loader = new ArffLoader();
+		        loader.setFile(new File("C://JAVA LEARNING TEST/td.arff"));
+		        Instances dataset = loader.getDataSet();
+	            dataset.setClassIndex(dataset.numAttributes() - 1);
+
+	          
+	            Classifier classifier = new J48();
+	            classifier.buildClassifier(dataset);
+	            
+	            List<class_1> hPTeachers = new ArrayList<>();
+	            List<class_1> mPTeachers = new ArrayList<>();
+	            List<class_1> lPTeachers = new ArrayList<>();
+
+		    
+	            for (class_1 teacher : teachers) {
+	                double[] attributes = new double[dataset.numAttributes()];
+	                attributes[0] = teacher.getYearsOfExperience();
+	                attributes[1] = teacher.getClassesCount();
+	                attributes[2] = teacher.getSalary();
+	                attributes[3] = teacher.getAge();
+	                attributes[4] = teacher.getLeavesTaken();
+	                Instance instance = new Instance(1.0, attributes);
+	                instance.setDataset(dataset);
+	                double predictedClass = classifier.classifyInstance(instance);
+
+	                
+	                if (predictedClass == 0) {
+	                    hPTeachers.add(teacher);
+	                } else if (predictedClass == 1) {
+	                	mPTeachers.add(teacher);
+	                } else {
+	                	lPTeachers.add(teacher);
+	                }
+	            }
+	                Thread hPThread = new Thread(() -> printTeacherDetails(hPTeachers, "High Performing Teachers"));
+	                hPThread.start();
+	                hPThread.join();
+	                Thread mPThread = new Thread(() -> printTeacherDetails(mPTeachers, "Medium Performing Teachers"));
+	                mPThread.start();
+	                mPThread.join();
+	                Thread lPThread = new Thread(() -> printTeacherDetails(lPTeachers, "Low Performing Teachers"));
+	                lPThread.start();
+	                lPThread.join();
+
+//	                hPThread.start();
+//	                mPThread.start();
+//	                lPThread.start();
+	                
+//	                hPThread.join();
+//	                mPThread.join();
+//	                lPThread.join();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		   }
+			   private static void printTeacherDetails(List<class_1> teachers, String groupName) {
+				   
+			            System.out.println(groupName + ":");
+			            for (class_1 teacher : teachers) {
+			                System.out.println(teacher);
+			            }
+			            System.out.println(); // Add an empty line for separation
+			        
+			
+		}
+
+		public static Comparator<class_1> StringComparator = new Comparator<class_1>() 
 		   {
 			   
 		       
@@ -230,7 +315,7 @@ public class class_1 {
 		    }
 		   
 		   
-		  
+	
 		  
 		 
 	    }
