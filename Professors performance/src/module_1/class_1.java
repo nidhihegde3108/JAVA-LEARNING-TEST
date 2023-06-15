@@ -227,8 +227,8 @@ public class class_1 {
 	    
 		   public String toString() {
 			   
-		        return "[ name=" + name + ", yearsOfExperience="
-		               + yearsOfExperience + ", classesCount=" + classesCount + ", salary=" + salary + ", age=" + age + ", leavesTaken=" + leavesTaken +"]";
+		        return "Name=" + name + ", YearsOfExperience="
+		               + yearsOfExperience + ", ClassesCount=" + classesCount + ", Salary=" + salary + ", age=" + age + ", leavesTaken=" + leavesTaken;
 		    }
 		   
 		   
