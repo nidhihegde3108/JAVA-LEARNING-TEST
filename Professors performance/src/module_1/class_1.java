@@ -111,52 +111,54 @@ public class class_1 {
 	 	    }
 	    }
 
-	    public void loop(ArrayList<class_1> teachers)
-	    {
-	    	 while(true)
-	 	    {
-	 	    System.out.println("Enter the input that is to be sorted :\n1.name\n2.yearsOfExperience\n3.classesCount\n4.salary\n5.age\n6.leavesTaken\n7.Verify performance");
-	 	    Scanner s=new Scanner(System.in);
-	 	    int ch=s.nextInt();
-	 	    switch(ch)
-	 	    {
-	 	    case 1:Collections.sort(teachers,
-	                 class_1.StringComparator);
-	 	    		break;
-	 	    
-	 	    case 2:Collections.sort(teachers,
-	                 class_1.YOEComparator);
-	 	    
-	 	    case 3:Collections.sort(teachers,
-	                 class_1.ccountComparator);
-	 	    		break;
-	 	    		
-	 	    case 4:Collections.sort(teachers,
-	                 class_1.salaryComparator);
-	 	    		break;
-	 	    		
-	 	    case 5:Collections.sort(teachers,
-	                 class_1.AgeComparator);
-	 	    		break;
-	 	    		
-	 	    case 6:Collections.sort(teachers,
-	                 class_1.LTComparator);
-	 	    		break;
-	 	    		
-	 	    		
-	 	    case 7:VerifyPerformance(teachers);
-	 	            System.exit(ch);
-	 	   
-	 	    }
-	 	    System.out.println("\n");
-	 	    for (class_1 c : teachers) {
-	             System.out.println(c);
-	         }
-	 	    System.out.println("\n");
-	 	    }
+	    public void Combination(ArrayList<class_1> teachers,String Comb)
+	    { 	
+	    	String[] sortAttributes = Comb.split(",");
+	        List<Comparator<class_1>> comparators = new ArrayList<>();
+
+	        for (String sortAttribute : sortAttributes) {
+	            switch (sortAttribute) {
+	                case "1":
+	                	comparators.add(Comparator.comparingInt(class_1::getYearsOfExperience));
+	                	break;
+	                case "2":
+	                    comparators.add(Comparator.comparingInt(class_1::getClassesCount));
+	                    break;
+	                
+	                case "3":
+	                    comparators.add(Comparator.comparingInt(class_1::getSalary));
+	                    break;
+	                    
+	                case "4":
+	                    comparators.add(Comparator.comparingInt(class_1::getAge));
+	                    break;
+	                case "5":
+	                    comparators.add(Comparator.comparingInt(class_1::getLeavesTaken));
+	                    break;
+	               
+	            }
+	        }
+
+	       
+	        Comparator<class_1> combinedComparator = (a, b) -> {
+	            for (Comparator<class_1> comparator : comparators) {
+	                int result = comparator.compare(a,b);
+	                if (result != 0) {
+	                    return result;
+	                }
+	            }
+	            return 0;
+	        };
+
+	        teachers.sort(combinedComparator);
+
+	        System.out.println("\nTeachers sorted by " + Comb + ":");
+	        for (class_1 teacher : teachers) {
+	            System.out.println(teacher);
+	        }
 	    }
 	
-		   private void VerifyPerformance(ArrayList<class_1> teachers) {
+		   public void VerifyPerformance(ArrayList<class_1> teachers) {
 			   try
 		        {
 
