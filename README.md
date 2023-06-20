@@ -173,10 +173,96 @@ with age.
    is used to generate the Comparator. Two class_1 objects' corresponding attributes are compared via the Comparator.
    
  → This combinedComparator iterates over the list of comparators and compares the teachers based on each attribute in the order they were added to the list. If a non-zero 
-   result is obtained from any comparison, it returns the result. If all comparisons yield zero, indicating equality based on the specified attributes, it returns zero.
+   the result is obtained from any comparison, it returns the result. If all comparisons yield zero, indicating equality based on the specified attributes, it returns zero.
+
+
+4. Create a program that can classify the teacher based on various attributes namely age, 
+classes count, years of count, leave taken into 
  
+ → High-Performing teachers
 
+ → Medium-performing teachers
+ 
+ → Low-performing teachers
+ 
+Hint make use of Weka library
 
+			public void VerifyPerformance(ArrayList<class_1> teachers) {
+			try
+		        {
+
+		        ArffLoader loader = new ArffLoader();
+		        loader.setFile(new File("C://JAVA LEARNING TEST/td.arff"));
+		        Instances dataset = loader.getDataSet();
+	                dataset.setClassIndex(dataset.numAttributes() - 1);
+
+	          
+	  		Classifier classifier = new J48();
+	            	classifier.buildClassifier(dataset);
+	            
+	            	List<class_1> hPTeachers = new ArrayList<>();
+	            	List<class_1> mPTeachers = new ArrayList<>();
+	            	List<class_1> lPTeachers = new ArrayList<>();
+
+		    
+	            for (class_1 teacher : teachers) {
+	                double[] attributes = new double[dataset.numAttributes()];
+	                attributes[0] = teacher.getYearsOfExperience();
+	                attributes[1] = teacher.getClassesCount();
+	                attributes[2] = teacher.getSalary();
+	                attributes[3] = teacher.getAge();
+	                attributes[4] = teacher.getLeavesTaken();
+	                Instance instance = new Instance(1.0, attributes);
+	                instance.setDataset(dataset);
+	                double predictedClass = classifier.classifyInstance(instance);
+
+	                
+	                if (predictedClass == 0) {
+	                    hPTeachers.add(teacher);
+	                } else if (predictedClass == 1) {
+	                	mPTeachers.add(teacher);
+	                } else {
+	                	lPTeachers.add(teacher);
+	                }
+	            }
+
+→ The code loads an ARFF file containing a pre-trained dataset using the Weka library and produces an instance object called "dataset".
+
+→ The dataset is used to generate and train a Classifier object of type J48 - a decision tree classifier in Weka.
+
+→ hPTeachers for high performance, mPTeachers for medium performance, and lPTeachers for low performance are the three ArrayList objects produced to hold the teachers 
+  according to their expected performance category.
+
+→ The performance category for the teacher's instance will be predicted using the classifier's classifyInstance method.
+
+5. Once classification is done use 3 threads for printing details of 3 different group of teachers
+
+   			Thread hPThread = new Thread(() -> printTeacherDetails(hPTeachers, "High Performing Teachers"));
+	                hPThread.start();
+	                hPThread.join();
+	                Thread mPThread = new Thread(() -> printTeacherDetails(mPTeachers, "Medium Performing Teachers"));
+	                mPThread.start();
+	                mPThread.join();
+	                Thread lPThread = new Thread(() -> printTeacherDetails(lPTeachers, "Low Performing Teachers"));
+	                lPThread.start();
+	                lPThread.join();
+
+   			private static void printTeacherDetails(List<class_1> teachers, String groupName) {
+				   
+			System.out.println(groupName + ":");
+			for (class_1 teacher : teachers) {
+			System.out.println(teacher);
+			}
+			System.out.println();
+
+   → hPThread is a Thread object created . It calls the printTeacherDetails method, passing hPTeachers  and 
+     the string "High Performing Teachers" as arguments.
+   
+   → The start method is called on hPThread to start the execution of the thread.
+
+   → The join method is called on hPThread immediately after starting it. This ensures that the main thread waits for hPThread to complete its execution before proceeding 
+     to the next thread. The mPThread and lPThread threads are created, started, and joined in the same manner.
+    
 
  
 
