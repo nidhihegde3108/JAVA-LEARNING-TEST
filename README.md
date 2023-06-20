@@ -104,10 +104,81 @@ or professors based on their performance.
    		}
 
  → Using ArrayList "teachers" to add an object of type "class_1" to it.
+ 
  → "display" method is used to showcase all the details of teachers
 
+3. Create a program which can take a list or a single value for sort by – age, classes count, 
+years of experience and leaves taken, based on input sort all the teachers and display 
+the details in sorted order.
+For example – input sortby – age then we need to sort teacher details by age, input sortby – 
+class count, age then teacher details must be sorted by combination of class count along 
+with age.
+
+		System.out.println("Enter the combination to be sorted...\n1.Years Of Experience\n2.Class Count\n3.Salary\n4.Age\n5.Leavestaken");
+		Scanner s=new Scanner(System.in);
+		String Comb=s.next();
+		c1.Combination(teachers,Comb);
+
+   		 public void Combination(ArrayList<class_1> teachers,String Comb)
+	    { 	
+	    	String[] sortAttributes = Comb.split(",");
+	        List<Comparator<class_1>> comparators = new ArrayList<>();
+
+	        for (String sortAttribute : sortAttributes) {
+	            switch (sortAttribute) {
+	                case "1":
+	                	comparators.add(Comparator.comparingInt(class_1::getYearsOfExperience));
+	                	break;
+	                case "2":
+	                    comparators.add(Comparator.comparingInt(class_1::getClassesCount));
+	                    break;
+	                
+	                case "3":
+	                    comparators.add(Comparator.comparingInt(class_1::getSalary));
+	                    break;
+	                    
+	                case "4":
+	                    comparators.add(Comparator.comparingInt(class_1::getAge));
+	                    break;
+	                case "5":
+	                    comparators.add(Comparator.comparingInt(class_1::getLeavesTaken));
+	                    break;
+	               
+	            }
+	        }
+
+	       
+	        Comparator<class_1> combinedComparator = (a, b) -> {
+	            for (Comparator<class_1> comparator : comparators) {
+	                int result = comparator.compare(a,b);
+	                if (result != 0) {
+	                    return result;
+	                }
+	            }
+	            return 0;
+	        };
+
+	        teachers.sort(combinedComparator);
+
+	        System.out.println("\nTeachers sorted by " + Comb + ":");
+	        for (class_1 teacher : teachers) {
+	            System.out.println(teacher);
+	        }
+	    }
+
+ → The provided code creates a function called "Combination" that has two inputs: an ArrayList of class_1 object objects and a String "Comb". This method uses the Comb 
+   string's sorting criteria to order the teachers in the ArrayList.
+   
+ → A appropriate Comparator is produced and added to the comparators list for each attribute in the sortAttributes array. Based on the attribute number, a switch statement 
+   is used to generate the Comparator. Two class_1 objects' corresponding attributes are compared via the Comparator.
+   
+ → This combinedComparator iterates over the list of comparators and compares the teachers based on each attribute in the order they were added to the list. If a non-zero 
+   result is obtained from any comparison, it returns the result. If all comparisons yield zero, indicating equality based on the specified attributes, it returns zero.
+ 
 
 
+
+ 
 
 
 
