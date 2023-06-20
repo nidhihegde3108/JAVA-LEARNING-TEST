@@ -79,7 +79,7 @@ or professors based on their performance.
 2. Create a program which can display details of all the teachers using the concept of 
   Collections.
 
-    ArrayList<class_1> teachers=new ArrayList<>();
+                ArrayList<class_1> teachers=new ArrayList<>();
   
 		teachers.add(new class_1("Nidhi", 12, 16, 80000, 35, 8));
 		teachers.add(new class_1("Neha", 11, 2, 80000, 5 , 5));
@@ -88,12 +88,12 @@ or professors based on their performance.
 		teachers.add(new class_1("Suresh", 10, 8, 7000, 14 , 6));
 		teachers.add(new class_1("Ramesh", 13, 2, 4000, 13 , 11));
   
-	  c1.display(teachers);
-    public void display(ArrayList<class_1> teachers)
-	    {
+	 	c1.display(teachers);
+     		public void display(ArrayList<class_1> teachers)
+	    	{
 	    	 for(class_1 teacher : teachers)
 	 	    {
-	 	    	System.out.println("Teacher Name : " + teacher.getName());
+	 	     System.out.println("Teacher Name : " + teacher.getName());
 	             System.out.println("Years of Experience : " + teacher.getYearsOfExperience());
 	             System.out.println("Classes Count : " + teacher.getClassesCount());
 	             System.out.println("Salary : " + teacher.getSalary());
@@ -101,6 +101,7 @@ or professors based on their performance.
 	             System.out.println("Leaves Taken : " + teacher.getLeavesTaken());
 	             System.out.println("\n");     
 	 	    }
+   		}
 
  → Using ArrayList "teachers" to add an object of type "class_1" to it.
  → "display" method is used to showcase all the details of teachers
